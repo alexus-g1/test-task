@@ -1,20 +1,22 @@
 <mat-dialog-content>
   <mat-form-field>
-    <mat-label>Name</mat-label>
+    <mat-label>Название</mat-label>
     <input matInput [(ngModel)]="name" />
   </mat-form-field>
   <br />
   <mat-form-field>
-    <mat-label>Description</mat-label>
+    <mat-label>Описание</mat-label>
     <textarea matInput [(ngModel)]="description"></textarea>
   </mat-form-field>
   <br />
   <mat-form-field>
-    <mat-label>Complete in</mat-label>
-    <input type="datetime-local" matNativeControl [(ngModel)]="completeIn" />
+    <mat-label>Дата выполнения</mat-label>
+    <input type="datetime-local" matInput [(ngModel)]="completeIn" />
   </mat-form-field>
 </mat-dialog-content>
 <mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">No Thanks</button>
-  <button mat-button [mat-dialog-close]="getData()" cdkFocusInitial>Ok</button>
+  <button mat-button (click)="onNoClick()">Отмента</button>
+  <button mat-button [mat-dialog-close]="getData()" cdkFocusInitial>
+    Добавить
+  </button>
 </mat-dialog-actions>

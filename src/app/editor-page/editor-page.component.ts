@@ -16,17 +16,19 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { Element } from '../element';
 import { ElementsService } from '../elements.service';
-import { DatePipe } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { DatePipe, registerLocaleData } from '@angular/common';
+import { LOCALE_ID } from '@angular/core';
+import localeRu from '@angular/common/locales/ru';
 
+registerLocaleData(localeRu);
 @Component({
   selector: 'app-editor-page',
   standalone: true,
   imports: [
     MatFormFieldModule,
     MatInputModule,
-    FormsModule,
     MatButtonModule,
     MatMenuModule,
     MatTableModule,
@@ -35,6 +37,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatIconModule,
     MatTooltipModule,
   ],
+  providers: [{ provide: LOCALE_ID, useValue: 'ru' }],
   templateUrl: './editor-page.component.html',
   styleUrl: './editor-page.component.scss',
 })
@@ -61,6 +64,7 @@ export class EditorPageComponent {
       console.log('The dialog was closed');
       if (result !== undefined) {
         this.elementsService.addElement({
+          id: 0,
           name: result.name,
           description: result.description,
           completeIn: new Date(result.completeIn),
@@ -72,8 +76,10 @@ export class EditorPageComponent {
   }
 
   openUpdateDialog(element: Element): void {
+    console.log(element);
     const dialogRef = this.dialog.open(UpdateElementDialog, {
       data: {
+        id: element.id,
         name: element.name,
         description: element.description,
         completeIn: element.completeIn,
@@ -85,13 +91,15 @@ export class EditorPageComponent {
       console.log('The dialog was closed');
       if (result !== undefined) {
         this.elementsService.updateElement({
+          id: result.id,
           name: result.name,
           description: result.description,
           completeIn: new Date(result.completeIn),
           createdAt: result.createdAt,
         });
-        this.getElements();
       }
+
+      this.table.renderRows();
     });
   }
 
@@ -157,7 +165,9 @@ export class AddElementDialog {
 })
 export class UpdateElementDialog {
   readonly dialogRef = inject(MatDialogRef<AddElementDialog>);
+
   readonly data = inject<Element>(MAT_DIALOG_DATA);
+  readonly id = model(this.data.id);
   readonly name = model(this.data.name);
   readonly description = model(this.data.description);
   readonly completeIn = model(this.data.completeIn);
@@ -165,6 +175,7 @@ export class UpdateElementDialog {
 
   getData() {
     return {
+      id: this.id(),
       name: this.name(),
       description: this.description(),
       completeIn: this.completeIn(),

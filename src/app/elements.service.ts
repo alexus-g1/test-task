@@ -5,20 +5,23 @@ import { signal } from '@angular/core';
   providedIn: 'root',
 })
 export class ElementsService {
-  elements = signal<Element[]>([
+  private elements = signal<Element[]>([
     {
+      id: 0,
       name: 'тест',
       description: 'test',
       completeIn: new Date(),
       createdAt: new Date(),
     },
     {
+      id: 1,
       name: 'тест2',
       description: 'test',
       completeIn: new Date(),
       createdAt: new Date(),
     },
     {
+      id: 2,
       name: 'тест3',
       description: 'test',
       completeIn: new Date(),
@@ -26,15 +29,18 @@ export class ElementsService {
     },
   ]);
 
+  private id: number = 2;
+  private getNewId(): number {
+    this.id++;
+    return this.id;
+  }
   addElement(element: Element) {
-    this.elements().push(element);
-    //console.log(this.elements);
+    this.elements().push({ ...element, id: this.getNewId() });
   }
 
   updateElement(element: Element) {
     let updatedElement = this.elements().find((item) => {
-      console.log(element);
-      return element.createdAt.getTime() === item.createdAt.getTime();
+      return item.id === element.id;
     });
 
     if (updatedElement) {
@@ -42,7 +48,6 @@ export class ElementsService {
       updatedElement.description = element.description;
       updatedElement.name = element.name;
     }
-    console.log(updatedElement);
   }
 
   deleteElement(element: Element) {
@@ -69,10 +74,5 @@ export class ElementsService {
     return this.elements();
   }
 
-  getElement(id: number) {
-    return this.elements()[id];
-  }
-  constructor() {
-    console.log(this.elements);
-  }
+  constructor() {}
 }
