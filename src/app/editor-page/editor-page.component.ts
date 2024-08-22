@@ -114,6 +114,7 @@ export class EditorPageComponent {
 @Component({
   selector: 'add-element-dialog',
   templateUrl: 'add-element-dialog.html',
+  styleUrls: ['./editor-page.component.scss'],
   standalone: true,
   imports: [
     MatFormFieldModule,
@@ -148,6 +149,7 @@ export class AddElementDialog {
 @Component({
   selector: 'add-element-dialog',
   templateUrl: 'add-element-dialog.html',
+  styleUrls: ['./editor-page.component.scss'],
   standalone: true,
   imports: [
     MatFormFieldModule,
