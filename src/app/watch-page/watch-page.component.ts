@@ -38,7 +38,7 @@ export class WatchPageComponent {
   }
 
   elements: Element[] = [];
-  displayedColumns: string[] = ['name', 'completeIn', 'createdAt', 'menu'];
+  displayedColumns: string[] = ['name', 'createdAt', 'completeIn', 'menu'];
   constructor(private elementsService: ElementsService) {}
 
   ngOnInit() {

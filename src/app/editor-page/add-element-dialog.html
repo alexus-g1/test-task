@@ -11,7 +11,13 @@
   <br />
   <mat-form-field>
     <mat-label>Дата выполнения</mat-label>
-    <input type="datetime-local" matInput [(ngModel)]="completeIn" />
+    <input
+      type="datetime-local"
+      matInput
+      [(ngModel)]="completeIn"
+      min="2024-01-01T00:00"
+      max="2090-01-01T00:00"
+    />
   </mat-form-field>
 </mat-dialog-content>
 <mat-dialog-actions>

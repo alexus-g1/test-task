@@ -61,7 +61,6 @@ export class EditorPageComponent {
     const dialogRef = this.dialog.open(AddElementDialog);
 
     dialogRef.afterClosed().subscribe((result) => {
-      console.log('The dialog was closed');
       if (result !== undefined) {
         this.elementsService.addElement({
           id: 0,
@@ -76,7 +75,6 @@ export class EditorPageComponent {
   }
 
   openUpdateDialog(element: Element): void {
-    console.log(element);
     const dialogRef = this.dialog.open(UpdateElementDialog, {
       data: {
         id: element.id,
@@ -88,7 +86,6 @@ export class EditorPageComponent {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      console.log('The dialog was closed');
       if (result !== undefined) {
         this.elementsService.updateElement({
           id: result.id,

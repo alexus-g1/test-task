@@ -8,22 +8,22 @@ export class ElementsService {
   private elements = signal<Element[]>([
     {
       id: 0,
-      name: 'тест',
-      description: 'test',
+      name: 'Элемент №1',
+      description: 'Описание к первому элементу',
       completeIn: new Date(),
       createdAt: new Date(),
     },
     {
       id: 1,
-      name: 'тест2',
-      description: 'test',
+      name: 'Элемент №2',
+      description: 'Описание ко второму элементу',
       completeIn: new Date(),
       createdAt: new Date(),
     },
     {
       id: 2,
-      name: 'тест3',
-      description: 'test',
+      name: 'Элемент №3',
+      description: 'Описание к третьему элементу',
       completeIn: new Date(),
       createdAt: new Date(),
     },
@@ -70,7 +70,6 @@ export class ElementsService {
   }
 
   getElements(): Element[] {
-    //console.log(this.elements);
     return this.elements();
   }
 
