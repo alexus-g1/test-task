@@ -1,0 +1,83 @@
+<button mat-raised-button (click)="openAddDialog()">Добавить элемент</button>
+
+<table mat-table [dataSource]="elements" class="mat-elevation-z8">
+  <!--- Note that these columns can be defined in any order.
+            The actual rendered columns are set as a property on the row definition" -->
+
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef>Название</th>
+    <td mat-cell *matCellDef="let element">
+      {{ element.name }}
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="createdAt">
+    <th mat-header-cell *matHeaderCellDef>Дата создания</th>
+    <td mat-cell *matCellDef="let element">
+      {{ element.createdAt | date : "medium" }}
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="completeIn">
+    <th mat-header-cell *matHeaderCellDef>Дата выполнения</th>
+    <td mat-cell *matCellDef="let element">
+      {{ element.completeIn | date : "medium" }}
+    </td>
+  </ng-container>
+
+  <!-- <ng-container matColumnDef="copybtn">
+    <th mat-header-cell *matHeaderCellDef></th>
+    <td mat-cell *matCellDef="let element">
+      <button
+        matTooltip="копировать"
+        mat-icon-button
+        (click)="copyElement(element)"
+      >
+        <mat-icon>add</mat-icon>
+      </button>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="editbtn">
+    <th mat-header-cell *matHeaderCellDef></th>
+    <td mat-cell *matCellDef="let element">
+      <button
+        matTooltip="редактировать"
+        mat-icon-button
+        (click)="openUpdateDialog(element)"
+      >
+        <mat-icon>edit</mat-icon>
+      </button>
+    </td>
+  </ng-container> -->
+
+  <ng-container matColumnDef="btngroup">
+    <th mat-header-cell *matHeaderCellDef></th>
+    <td mat-cell *matCellDef="let element">
+      <button
+        matTooltip="копировать"
+        mat-icon-button
+        (click)="copyElement(element)"
+      >
+        <mat-icon>add</mat-icon>
+      </button>
+      <button
+        matTooltip="редактировать"
+        mat-icon-button
+        (click)="openUpdateDialog(element)"
+      >
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button
+        matTooltip="удалить"
+        mat-icon-button
+        (click)="deleteElement(element)"
+      >
+        <mat-icon>delete</mat-icon>
+      </button>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let element; columns: displayedColumns"></tr>
+</table>

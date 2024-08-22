@@ -1,0 +1,46 @@
+<table mat-table [dataSource]="elements" class="mat-elevation-z8">
+  <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+
+  <!-- Position Column -->
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef>Название</th>
+    <td mat-cell *matCellDef="let element" (click)="openDialog(element)">
+      {{ element.name }}
+    </td>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="createdAt">
+    <th mat-header-cell *matHeaderCellDef>Дата создания</th>
+    <td mat-cell *matCellDef="let element" (click)="openDialog(element)">
+      {{ element.createdAt | date : "medium" }}
+    </td>
+  </ng-container>
+
+  <!-- Weight Column -->
+  <ng-container matColumnDef="completeIn">
+    <th mat-header-cell *matHeaderCellDef>Дата выполнения</th>
+    <td mat-cell *matCellDef="let element" (click)="openDialog(element)">
+      {{ element.completeIn | date : "medium" }}
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="menu">
+    <th mat-header-cell *matHeaderCellDef></th>
+    <td mat-cell *matCellDef="let element">
+      <button mat-button [matMenuTriggerFor]="menu">Переместить</button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="moveElement(element, 'up')">
+          Вверх
+        </button>
+        <button mat-menu-item (click)="moveElement(element, 'down')">
+          Вниз
+        </button>
+      </mat-menu>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let element; columns: displayedColumns"></tr>
+</table>
